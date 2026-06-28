@@ -59,6 +59,21 @@ To run the test suite (XML parser and text-report rendering):
 cargo test
 ```
 
+### Installing on Linux
+
+A `Makefile` installs the release binary, the `.desktop` launcher and the
+application icon into the standard locations (and refreshes the icon/desktop
+caches):
+
+```sh
+sudo make install              # into /usr/local
+make install PREFIX=~/.local   # or a per-user prefix
+```
+
+The icon ships as PNGs in the `hicolor` theme under `data/icons/`; when running
+straight from the source tree (`cargo run`) that directory is registered
+automatically so the window still shows the icon without installing.
+
 ## Privileges
 
 Some scan types — SYN stealth (`-sS`), UDP (`-sU`), OS detection (`-O`),

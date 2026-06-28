@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=NmapGTK
+GenericName=Network Scanner
+Comment=A modern nmap frontend
+Exec=nmapgtk
+Icon=org.nmapgtk.NmapGTK
+Terminal=false
+Categories=Network;System;Security;
+Keywords=nmap;scan;network;ports;security;
+StartupNotify=true
+StartupWMClass=org.nmapgtk.NmapGTK
