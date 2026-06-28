@@ -1,0 +1,48 @@
+/* Port state pills */
+.state-pill {
+  font-weight: bold;
+  border-radius: 999px;
+  padding: 2px 12px;
+  margin: 4px 0;
+}
+
+.state-open {
+  background: alpha(@success_color, 0.18);
+  color: @success_color;
+}
+
+.state-closed {
+  background: alpha(@error_color, 0.15);
+  color: @error_color;
+}
+
+.state-filtered {
+  background: alpha(@warning_color, 0.18);
+  color: @warning_color;
+}
+
+/* Up/down indicator dot in the host sidebar */
+.dot-up {
+  color: @success_color;
+}
+
+.dot-down {
+  color: @error_color;
+}
+
+.mono {
+  font-family: monospace;
+}
+
+/* NSE category danger indicators */
+.danger-safe {
+  color: @success_color;
+}
+
+.danger-caution {
+  color: @warning_color;
+}
+
+.danger-dangerous {
+  color: @error_color;
+}
