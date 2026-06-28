@@ -500,6 +500,7 @@ pub fn build_ui(app: &adw::Application) {
         .default_height(700)
         .content(&ui.toast)
         .build();
+    window.set_icon_name(Some(crate::APP_ID));
     window.present();
 }
 

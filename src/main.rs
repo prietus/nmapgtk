@@ -8,7 +8,7 @@ mod window;
 use gtk::prelude::*;
 use gtk::{gdk, glib};
 
-const APP_ID: &str = "org.nmapgtk.NmapGTK";
+pub const APP_ID: &str = "io.github.nmapgtk";
 
 fn main() -> glib::ExitCode {
     let app = adw::Application::builder()
@@ -30,15 +30,26 @@ fn main() -> glib::ExitCode {
 /// also register the in-tree `data/icons` directory; an installed copy is found
 /// via the standard `share/icons/hicolor` search path instead.
 fn setup_icons() {
-    gtk::Window::set_default_icon_name(APP_ID);
-
     if let Some(display) = gdk::Display::default() {
         let theme = gtk::IconTheme::for_display(&display);
-        let dev_icons = concat!(env!("CARGO_MANIFEST_DIR"), "/data/icons");
-        if std::path::Path::new(dev_icons).is_dir() {
-            theme.add_search_path(dev_icons);
+        for path in icon_search_paths() {
+            theme.add_search_path(path);
         }
     }
+    gtk::Window::set_default_icon_name(APP_ID);
+}
+
+/// Directories to probe for `data/icons` when running uninstalled (dev builds):
+/// relative to the current working directory, and relative to the project root
+/// derived from the running binary (`target/<profile>/nmapgtk`).
+fn icon_search_paths() -> Vec<std::path::PathBuf> {
+    let mut paths = vec![std::path::PathBuf::from("data/icons")];
+    if let Ok(exe) = std::env::current_exe() {
+        if let Some(root) = exe.ancestors().nth(3) {
+            paths.push(root.join("data/icons"));
+        }
+    }
+    paths
 }
 
 fn load_css() {

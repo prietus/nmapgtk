@@ -59,20 +59,27 @@ To run the test suite (XML parser and text-report rendering):
 cargo test
 ```
 
-### Installing on Linux
-
-A `Makefile` installs the release binary, the `.desktop` launcher and the
-application icon into the standard locations (and refreshes the icon/desktop
-caches):
+### Install (optional)
 
 ```sh
-sudo make install              # into /usr/local
-make install PREFIX=~/.local   # or a per-user prefix
+cargo build --release
+sudo install -Dm755 target/release/nmapgtk /usr/local/bin/nmapgtk
+sudo install -Dm644 data/io.github.nmapgtk.desktop \
+    /usr/share/applications/io.github.nmapgtk.desktop
+
+# Icon (all hicolor theme sizes)
+for s in 16 32 48 64 128 256 512; do
+    sudo install -Dm644 "data/icons/hicolor/${s}x${s}/apps/io.github.nmapgtk.png" \
+        "/usr/share/icons/hicolor/${s}x${s}/apps/io.github.nmapgtk.png"
+done
+sudo gtk-update-icon-cache -f /usr/share/icons/hicolor
 ```
 
-The icon ships as PNGs in the `hicolor` theme under `data/icons/`; when running
-straight from the source tree (`cargo run`) that directory is registered
-automatically so the window still shows the icon without installing.
+Arch users can build from the PKGBUILDs under
+[`packaging/aur/`](packaging/aur/). The icon ships as PNGs in the `hicolor`
+theme under `data/icons/`; when running straight from the source tree
+(`cargo run`) that directory is registered automatically so the window still
+shows the icon without installing.
 
 ## Privileges
 
@@ -100,4 +107,4 @@ over stdout.
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE) © 2026 Carlos Prieto

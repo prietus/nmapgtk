@@ -1,6 +1,2 @@
-# Rust build artifacts
 /target
-
-# Editor / OS noise
-*.swp
-.DS_Store
+Cargo.lock
